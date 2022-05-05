@@ -8,8 +8,8 @@ import (
 )
 
 // Структура in memory-базы данных
-type storage struct {
-	mu       *sync.Mutex
+type DataStorage struct {
+	mu       sync.Mutex
 	tasks    map[string]tasks.Task
 	products map[string]*products.Product
 }

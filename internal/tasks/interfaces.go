@@ -10,6 +10,7 @@ type Task interface {
 
 // Структура задачи заказа клиента
 type Order struct {
+	ID string
 }
 
 // Структура задачи пополнения
