@@ -1,9 +1,15 @@
 package main
 
-func main() {
-	s:=server.New()
+import (
+	"log"
 
-	if err:=s.Run();err!=nil{
+	"github.com/kapralovs/warehouse/internal/server"
+)
+
+func main() {
+	s := server.New()
+
+	if err := s.Run(); err != nil {
 		log.Fatal(err)
 	}
 }
