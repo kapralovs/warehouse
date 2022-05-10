@@ -14,7 +14,7 @@ type DataStorage struct {
 	mu         sync.Mutex
 	Tasks      map[string]tasks.Task
 	Products   map[string]*products.Product
-	Users      map[string]*users.User
+	Profiles   map[string]*users.Profile
 	Cells      map[string]*warehouse.Cell
 	Warehouses map[string]*warehouse.Warehouse
 }

@@ -18,8 +18,8 @@ func edit() {
 
 }
 
-func AssignTo(usr *users.User) error {
+func AssignTo(usr *users.Profile) error {
 	return nil
 }
 
-func ToPool(){}
+func ToPool() {}

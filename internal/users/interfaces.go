@@ -1,7 +1,7 @@
 package users
 
 // Структура пользователя
-type User struct {
+type Profile struct {
 	General      *GeneralInfo
 	Account      *Account
 	Productivity *Productivity
@@ -18,12 +18,12 @@ type GeneralInfo struct {
 
 // Данные учетной записи пользователя
 type Account struct {
-	ID       string `json:""`
-	Login    string `json:""`
-	Password string `json:""`
-	IsAdmin  bool   `json:""`
+	ID       string `json:"id"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	IsAdmin  bool   `json:"is_admin"`
 }
 
 type Productivity struct {
-	PositionsCounter int `json:""`
+	PositionsCounter int `json:"PositionsCounter"`
 }

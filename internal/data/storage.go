@@ -12,7 +12,7 @@ func New() *DataStorage {
 
 // Инициализация хранилища
 func (ds *DataStorage) Init() {
-	ds.Users["1"] = &users.User{
+	ds.Profiles["1"] = &users.Profile{
 		General: &users.GeneralInfo{
 			Lastname: "Adminov",
 			Name:     "Admin",
@@ -21,8 +21,8 @@ func (ds *DataStorage) Init() {
 			Salary:   50000,
 		},
 		Account: &users.Account{
-			ID:    "1",
-			Login: "admin",
+			ID:       "1",
+			Username: "admin",
 		},
 	}
 }
@@ -34,12 +34,12 @@ func CheckDuplicates() error {
 // Функция проверяет остаток на месте, чтобы при пополнении и/или заказе забрать остаток
 // и освободить место для новых поступлений продукта
 func (ds *DataStorage) CheckProductReserve(prodID string) map[string]int {
+	productReserve := map[string]int{}
 	for id, cell := range ds.Cells {
-		if _, ok := cell.Content[prodID]; ok {
-
+		if product, ok := cell.Content[prodID]; ok {
+			productReserve[id] = product.Count
 		}
 	}
-	productReserve := map[string]int{}
 	return productReserve
 }
 

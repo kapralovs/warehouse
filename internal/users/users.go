@@ -1,14 +1,14 @@
 package users
 
 // Конструктор для нового пользователя
-func New() *User {
-	return &User{}
+func New() *Profile {
+	return &Profile{}
 }
 
-// func create() error {
+func create() error {
 
-// 	return nil
-// }
+	return nil
+}
 
 // func edit() error {
 // 	return nil
