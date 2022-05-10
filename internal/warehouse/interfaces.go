@@ -12,5 +12,5 @@ type Warehouse struct {
 // Структура ячейки хранения продукта
 type Cell struct {
 	ID      string
-	Content []*products.Product
+	Content map[string]*products.Product
 }

@@ -29,9 +29,9 @@ type ShippingUnit struct {
 // Структура задачи заказа клиента
 type Order struct {
 	Header        *TaskHeader
-	ID            string // ID заказа
-	Client        string // Клиент
-	Destination   string // Пункт назначения
+	ID            string `json:"id"`          // ID заказа
+	Client        string `json:"client"`      // Клиент
+	Destination   string `json:"destination"` // Пункт назначения
 	Items         []*products.Product
 	ShippingUnits []*ShippingUnit
 }
@@ -39,13 +39,13 @@ type Order struct {
 // Структура задачи пополнения
 type Refill struct {
 	Header         *TaskHeader
-	ReleasingPlace string // Отпускающее место
-	ProductID      string // ID требуемого продукта
-	Count          int    // Требуемое кол-во продукта
-	RecievingPlace string //Принимающее складское место
+	ReleasingPlace string `json:"releasing_place"` // Отпускающее место
+	ProductID      string `json:"product_id"`      // ID требуемого продукта
+	Count          int    `json:"count"`           // Требуемое кол-во продукта
+	RecievingPlace string `json:"recieving_place"` //Принимающее складское место
 }
 
 // Структура задачи отгрузки
 type Transport struct {
-	RecievingPlace string
+	RecievingPlace string `json:"recieving_place"` // Место хранения готового заказа
 }
