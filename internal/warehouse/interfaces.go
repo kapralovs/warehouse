@@ -3,11 +3,12 @@ package warehouse
 import "github.com/kapralovs/warehouse/internal/products"
 
 type Warehouse struct {
-	ID string
+	ID    int
+	Title string
+	Cells map[string]*Cell
 }
 
 type Cell struct {
 	ID      string
-	Stage   string
 	Content []*products.Product
 }
