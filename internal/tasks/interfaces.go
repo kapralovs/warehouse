@@ -39,10 +39,10 @@ type Order struct {
 // Структура задачи пополнения
 type Refill struct {
 	Header         *TaskHeader
-	ReleasingPlace string
-	ProductsID     []string
-	Count          int
-	RecievingPlace string
+	ReleasingPlace string // Отпускающее место
+	ProductID      string // ID требуемого продукта
+	Count          int    // Требуемое кол-во продукта
+	RecievingPlace string //Принимающее складское место
 }
 
 // Структура задачи отгрузки

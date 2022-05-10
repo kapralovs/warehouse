@@ -1,5 +1,6 @@
 package users
 
-func New() {
-
+// Конструктор для нового пользователя
+func New() *User {
+	return &User{}
 }

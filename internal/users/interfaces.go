@@ -1,5 +1,6 @@
 package users
 
+// Структура пользователя
 type User struct {
 	Account *Account
 	General *GeneralInfo
