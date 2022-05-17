@@ -9,6 +9,18 @@ import (
 	"github.com/kapralovs/warehouse/internal/warehouse"
 )
 
+// type Saver interface {
+// 	Save()
+// }
+
+// type Loader interface {
+// 	Load()
+// }
+
+// type Creator interface {
+// 	Create()
+// }
+
 // Структура in-memory базы данных
 type DataStorage struct {
 	mu         sync.Mutex

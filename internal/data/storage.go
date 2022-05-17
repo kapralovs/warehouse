@@ -1,6 +1,9 @@
 package data
 
 import (
+	"errors"
+	"log"
+
 	"github.com/kapralovs/warehouse/internal/products"
 	"github.com/kapralovs/warehouse/internal/users"
 )
@@ -43,8 +46,31 @@ func (ds *DataStorage) CheckProductReserve(prodID string) map[string]int {
 	return productReserve
 }
 
+// Функция проверяет содержимое ячейки
 func CheckCellContent() []*products.Product {
 	var content []*products.Product
 
 	return content
+}
+
+func (ds *DataStorage) CheckProfileDuplicates(p *users.Profile) error {
+	if p != nil {
+		if p.Account.ID != "" {
+			for id, profile := range ds.Profiles {
+				if id == p.Account.ID {
+					return errors.New("profile with this ID already exists")
+				}
+				if profile.Account.Username == p.Account.Username {
+					return errors.New("profile with this username already exists")
+				}
+
+				return nil
+			}
+
+			log.Println()
+			return errors.New("empty profile ID")
+		}
+	}
+
+	return errors.New("edited user profile is nil")
 }

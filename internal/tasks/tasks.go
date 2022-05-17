@@ -8,6 +8,7 @@ func NewOrder() *Order {
 }
 
 func create() {
+
 }
 
 func delete() {
@@ -19,6 +20,7 @@ func edit() {
 }
 
 func AssignTo(usr *users.Profile) error {
+
 	return nil
 }
 
