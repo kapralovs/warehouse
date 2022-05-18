@@ -6,6 +6,7 @@ import (
 
 // Интерфейс задачи
 type Task interface {
+	ID() string
 	Start()
 	Complete()
 }

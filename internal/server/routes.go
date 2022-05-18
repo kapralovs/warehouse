@@ -10,13 +10,43 @@ import (
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
-func (s *server) homepage() func(http.ResponseWriter, *http.Request) {
+// func (s *server) homepage() func(http.ResponseWriter, *http.Request) {
+// 	return func(w http.ResponseWriter, r *http.Request) {
+
+// 	}
+// }
+
+//--------------------Tasks--------------------
+
+func (s *server) createTask() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
 
-//--------------------Tasks--------------------
+func (s *server) editTask() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) deleteTask() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) getTasks() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) geTaskByID() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
 
 func (s *server) startTask() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -72,7 +102,43 @@ func (s *server) createUser() func(http.ResponseWriter, *http.Request) {
 	}
 }
 
+func (s *server) editUser() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
 func (s *server) deleteUser() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) getUsers() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_, err := authorization(s.storage, w, r)
+		if err != nil {
+			fmt.Fprintln(w, err)
+			return
+		}
+
+		for id := range s.storage.Profiles {
+			profile, err := s.storage.LoadUser(id)
+			if err != nil {
+				fmt.Fprintln(w, err)
+				return
+			}
+			jsonAsBytes, err := json.Marshal(profile)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Fprintln(w, string(jsonAsBytes))
+		}
+	}
+}
+
+func (s *server) getUserByID() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
@@ -80,4 +146,64 @@ func (s *server) deleteUser() func(http.ResponseWriter, *http.Request) {
 
 //--------------------Products--------------------
 
+func (s *server) createProduct() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) editProduct() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) deleteProduct() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) getProducts() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) getProductByID() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
 //--------------------Cells--------------------
+
+func (s *server) createCell() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) editCell() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) deleteCell() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) getCells() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (s *server) getCellByID() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
