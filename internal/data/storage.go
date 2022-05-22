@@ -9,12 +9,14 @@ import (
 )
 
 // Конструкор для нового хранилища данных
-func New() *DataStorage {
+func NewStorage() *DataStorage {
 	return &DataStorage{}
 }
 
 // Инициализация хранилища
 func (ds *DataStorage) Init() {
+	profilesDB := make(map[string]*users.Profile, 3)
+	ds.Profiles = profilesDB
 	ds.Profiles["1"] = &users.Profile{
 		General: &users.GeneralInfo{
 			Lastname: "Adminov",
@@ -26,6 +28,11 @@ func (ds *DataStorage) Init() {
 		Account: &users.Account{
 			ID:       "1",
 			Username: "admin",
+			Password: "admin",
+			IsAdmin:  true,
+		},
+		Productivity: &users.Productivity{
+			PositionsCounter: 234,
 		},
 	}
 }
