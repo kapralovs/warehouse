@@ -11,16 +11,18 @@ import (
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
-func checkCredentials(ds *data.DataStorage, encodedCreds string) (*users.Profile, error) {
+func checkCredentials(ds *data.DataStorage, username,password string) (*users.Profile, error) {
+	/*
 	decodedCreds, err := base64.StdEncoding.DecodeString(encodedCreds)
 	if err != nil {
 		return nil, err
 	}
 
 	creds := strings.Split(string(decodedCreds), ":")
+	*/
 
 	for _, profile := range ds.Profiles {
-		if profile.Account.Username == creds[0] && profile.Account.Password == creds[1] {
+		if profile.Account.Username == username && profile.Account.Password == password {
 			log.Printf("Credentials \"%s\" are checked\n", encodedCreds)
 			return profile, nil
 		}
@@ -30,8 +32,11 @@ func checkCredentials(ds *data.DataStorage, encodedCreds string) (*users.Profile
 }
 
 func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*users.Profile, error) {
+	/*
 	headerValue := r.Header.Get("Authorization")
 	encodedCreds := headerValue[len("Basic "):]
+	*/
+	username,password:=r.BasicAuth()
 	user, err := checkCredentials(ds, encodedCreds)
 	if err != nil {
 		w.Header().Add("WWW-Authenticate", "Basic realm="+encodedCreds)
