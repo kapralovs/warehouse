@@ -9,36 +9,24 @@ import (
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
-func checkCredentials(ds *data.DataStorage, username, password string) bool {
-	/*
-		decodedCreds, err := base64.StdEncoding.DecodeString(encodedCreds)
-		if err != nil {
-			return nil, err
-		}
-
-		creds := strings.Split(string(decodedCreds), ":")
-	*/
-
+func checkCredentials(ds *data.DataStorage, username, password string) (*users.Profile, bool) {
 	for _, profile := range ds.Profiles {
 		if profile.Account.Username == username && profile.Account.Password == password {
-			return true
+			return profile, true
 		}
 	}
 
-	return false
+	return nil, false
 	// errors.New("authorisation failed because credentials are incorrect")
 }
 
 func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*users.Profile, error) {
-	/*
-		headerValue := r.Header.Get("Authorization")
-		encodedCreds := headerValue[len("Basic "):]
-	*/
 	username, password, ok := r.BasicAuth()
-	if ok && checkCredentials(ds, username, password) {
-		return
-	}
-	if err != nil {
+	if ok {
+		if user, ok := checkCredentials(ds, username, password); ok {
+			return user, nil
+		}
+
 		w.Header().Add("WWW-Authenticate", "Basic realm="+encodedCreds)
 		w.WriteHeader(http.StatusUnauthorized)
 

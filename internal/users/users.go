@@ -1,6 +1,7 @@
 package users
 
 import (
+	"errors"
 	"fmt"
 	"log"
 )
@@ -18,4 +19,12 @@ func CheckAdminRights(profile *Profile) error {
 
 	log.Printf("The administrator rights check has been passed. User \"%s\" is administrator\n", profile.Account.Username)
 	return nil
+}
+
+func CheckOnlineStatus(p *Profile) error {
+	if p.Account.IsOnline {
+		return nil
+	}
+
+	return errors.New("this user is offline")
 }
