@@ -10,11 +10,13 @@ import (
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
-// func (s *server) homepage() func(http.ResponseWriter, *http.Request) {
-// 	return func(w http.ResponseWriter, r *http.Request) {
+func (s *server) homepage() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if user, err := authorization(s.storage, w, r); err != nil {
 
-// 	}
-// }
+		}
+	}
+}
 
 //--------------------Tasks--------------------
 

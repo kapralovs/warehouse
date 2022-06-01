@@ -21,18 +21,16 @@ func checkCredentials(ds *data.DataStorage, username, password string) (*users.P
 }
 
 func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*users.Profile, error) {
-	username, password, ok := r.BasicAuth()
-	if ok {
+
+	if username, password, ok := r.BasicAuth(); ok {
 		if user, ok := checkCredentials(ds, username, password); ok {
+			log.Printf("User \"%s\" is authorised\n", user.Account.Username)
 			return user, nil
 		}
-
-		w.Header().Add("WWW-Authenticate", "Basic realm="+encodedCreds)
-		w.WriteHeader(http.StatusUnauthorized)
-
-		return nil, errors.New("authorization failed")
 	}
 
-	log.Printf("User \"%s\" is authorised\n", user.Account.Username)
-	return user, nil
+	w.Header().Add("WWW-Authenticate", "Basic realm="+r.Header.Get("Authorization"))
+	w.WriteHeader(http.StatusUnauthorized)
+
+	return nil, errors.New("authorization failed")
 }

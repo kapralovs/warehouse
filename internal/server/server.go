@@ -15,7 +15,7 @@ func New() *server {
 }
 
 func (s *server) initRouter() {
-	// s.router.HandleFunc("/", s.homepage())
+	s.router.HandleFunc("/", s.homepage())
 	//Tasks
 	s.router.HandleFunc("/task", s.getUsers()).Methods("GET")
 	s.router.HandleFunc("/task", s.createUser()).Methods("POST")
