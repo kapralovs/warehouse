@@ -12,8 +12,8 @@ type GeneralInfo struct {
 	Lastname string `json:"lastname"`
 	Name     string `json:"name"`
 	Age      int    `json:"age"`
-	Position string `json:"position"`
-	Salary   int    `json:""`
+	Role     string `json:"role"`
+	Salary   int    `json:"Salary"`
 }
 
 // Данные учетной записи пользователя

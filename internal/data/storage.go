@@ -17,12 +17,12 @@ func NewStorage() *DataStorage {
 func (ds *DataStorage) Init() {
 	profilesDB := make(map[string]*users.Profile, 3)
 	ds.Profiles = profilesDB
-	ds.Profiles["1"] = &users.Profile{
+	ds.Profiles["admin"] = &users.Profile{
 		General: &users.GeneralInfo{
 			Lastname: "Adminov",
 			Name:     "Admin",
 			Age:      36,
-			Position: users.ManagerPosition,
+			Role:     users.Manager,
 			Salary:   50000,
 		},
 		Account: &users.Account{
