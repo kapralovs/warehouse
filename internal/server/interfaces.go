@@ -5,6 +5,7 @@ import (
 	"github.com/kapralovs/warehouse/internal/data"
 )
 
+// Server structure
 type server struct {
 	router  *mux.Router
 	storage *data.DataStorage

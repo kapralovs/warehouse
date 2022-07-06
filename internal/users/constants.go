@@ -1,7 +1,10 @@
 package users
 
 const (
-	Manager     = "Manager"
+	// Manager postion
+	Manager = "Manager"
+	// Order picker position
 	OrderPicker = "Order Picker"
-	Dispatcher  = "Dispatcher"
+	// Dispatcher position
+	Dispatcher = "Dispatcher"
 )

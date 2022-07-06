@@ -22,6 +22,7 @@ import (
 // 	// errors.New("authorisation failed because credentials are incorrect")
 // }
 
+// Авторизация пользователя
 func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*users.Profile, error) {
 
 	if username, password, ok := r.BasicAuth(); ok {

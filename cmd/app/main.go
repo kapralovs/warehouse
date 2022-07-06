@@ -7,8 +7,10 @@ import (
 )
 
 func main() {
+	// Создаём новый сервер
 	s := server.New()
 
+	// Запускаем сервер
 	if err := s.Run(); err != nil {
 		log.Fatal(err)
 	}
