@@ -16,32 +16,34 @@ func New() *server {
 
 func (s *server) initRouter() {
 	s.router.HandleFunc("/", s.homepage())
-	//Tasks
-	s.router.HandleFunc("/task", s.getUsers()).Methods("GET")
-	s.router.HandleFunc("/task", s.createUser()).Methods("POST")
-	s.router.HandleFunc("/task/{id}", s.editUser()).Methods("POST")
-	s.router.HandleFunc("/task/{id}", s.deleteUser()).Methods("DELETE")
-	s.router.HandleFunc("/task/{id}", s.getUserByID()).Methods("GET")
-	// s.router.HandleFunc("/task/start/{id}", s.startTask())
+	// Routes
+	// Usiversal routes for all of the entities (like users,products,tasks,cells, etc.) instead the unique endpoint for every entity.
+	s.router.HandleFunc("/{entity}", s.getUsers()).Methods("GET")
+	s.router.HandleFunc("/{entity}", s.createUser()).Methods("POST")
+	s.router.HandleFunc("/{entity}/{id}", s.editUser()).Methods("POST")
+	s.router.HandleFunc("/{entity}/{id}", s.deleteUser()).Methods("DELETE")
+	s.router.HandleFunc("/{entity}/{id}", s.getUserByID()).Methods("GET")
+	// s.router.HandleFunc("/task/start/{id}", s.startTask())	//
 	// s.router.HandleFunc("/task/complete/{id}", s.completeTask())
-	//Users
-	s.router.HandleFunc("/user", s.getUsers()).Methods("GET")
-	s.router.HandleFunc("/user", s.createUser()).Methods("POST")
-	s.router.HandleFunc("/user/{id}", s.editUser()).Methods("POST")
-	s.router.HandleFunc("/user/{id}", s.deleteUser()).Methods("DELETE")
-	s.router.HandleFunc("/user/{id}", s.getUserByID()).Methods("GET")
-	//Products
-	s.router.HandleFunc("/product", s.getUsers()).Methods("GET")
-	s.router.HandleFunc("/product", s.createUser()).Methods("POST")
-	s.router.HandleFunc("/product/{id}", s.editUser()).Methods("POST")
-	s.router.HandleFunc("/product/{id}", s.deleteUser()).Methods("DELETE")
-	s.router.HandleFunc("/product/{id}", s.getUserByID()).Methods("GET")
-	//Cells
-	s.router.HandleFunc("/cell", s.getUsers()).Methods("GET")
-	s.router.HandleFunc("/cell", s.createUser()).Methods("POST")
-	s.router.HandleFunc("/cell/{id}", s.editUser()).Methods("POST")
-	s.router.HandleFunc("/cell/{id}", s.deleteUser()).Methods("DELETE")
-	s.router.HandleFunc("/cell/{id}", s.getUserByID()).Methods("GET")
+
+	// Users
+	// s.router.HandleFunc("/user", s.getUsers()).Methods("GET")
+	// s.router.HandleFunc("/user", s.createUser()).Methods("POST")
+	// s.router.HandleFunc("/user/{id}", s.editUser()).Methods("POST")
+	// s.router.HandleFunc("/user/{id}", s.deleteUser()).Methods("DELETE")
+	// s.router.HandleFunc("/user/{id}", s.getUserByID()).Methods("GET")
+	// Products
+	// s.router.HandleFunc("/product", s.getUsers()).Methods("GET")
+	// s.router.HandleFunc("/product", s.createUser()).Methods("POST")
+	// s.router.HandleFunc("/product/{id}", s.editUser()).Methods("POST")
+	// s.router.HandleFunc("/product/{id}", s.deleteUser()).Methods("DELETE")
+	// s.router.HandleFunc("/product/{id}", s.getUserByID()).Methods("GET")
+	// Cells
+	// s.router.HandleFunc("/cell", s.getUsers()).Methods("GET")
+	// s.router.HandleFunc("/cell", s.createUser()).Methods("POST")
+	// s.router.HandleFunc("/cell/{id}", s.editUser()).Methods("POST")
+	// s.router.HandleFunc("/cell/{id}", s.deleteUser()).Methods("DELETE")
+	// s.router.HandleFunc("/cell/{id}", s.getUserByID()).Methods("GET")
 }
 
 func (s *server) Run() error {
