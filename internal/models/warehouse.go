@@ -1,6 +1,4 @@
-package warehouse
-
-import "github.com/kapralovs/warehouse/internal/products"
+package models
 
 // Структура склада
 type Warehouse struct {
@@ -11,6 +9,6 @@ type Warehouse struct {
 
 // Структура ячейки хранения продукта
 type Cell struct {
-	ID      string                       // ID ячейки
-	Content map[string]*products.Product // Содержимое ячейки
+	ID      string              // ID ячейки
+	Content map[string]*Product // Содержимое ячейки
 }

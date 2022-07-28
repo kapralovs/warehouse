@@ -1,8 +1,4 @@
-package tasks
-
-import (
-	"github.com/kapralovs/warehouse/internal/products"
-)
+package models
 
 // Интерфейс задачи
 type Task interface {
@@ -22,7 +18,7 @@ type TaskHeader struct {
 
 // Структура Единицы Отгрузки (ЕО), которая хранит информацию о товарах, которые были закреплены
 type ShippingUnit struct {
-	Items []*products.Product
+	Items []*Product
 }
 
 // --------------------Структуры, определяющие конкретные задачи--------------------
@@ -33,7 +29,7 @@ type Order struct {
 	ID            string `json:"id"`          // ID заказа
 	Client        string `json:"client"`      // Клиент
 	Destination   string `json:"destination"` // Пункт назначения
-	Items         []*products.Product
+	Items         []*Product
 	ShippingUnits []*ShippingUnit
 }
 
