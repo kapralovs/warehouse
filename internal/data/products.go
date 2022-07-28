@@ -4,10 +4,10 @@ import (
 	"errors"
 	"log"
 
-	"github.com/kapralovs/warehouse/internal/products"
+	"github.com/kapralovs/warehouse/internal/models"
 )
 
-func (ds *DataStorage) SaveProduct(p *products.Product) error {
+func (ds *DataStorage) SaveProduct(p *models.Product) error {
 	if p != nil {
 		if p.ID == "" {
 			return errors.New("can't save product with empty ID field")
@@ -24,7 +24,7 @@ func (ds *DataStorage) SaveProduct(p *products.Product) error {
 	return errors.New("can't save current profile, because profile is nil")
 }
 
-func (ds *DataStorage) LoadProduct(id string) (*products.Product, error) {
+func (ds *DataStorage) LoadProduct(id string) (*models.Product, error) {
 	if product, ok := ds.Products[id]; ok {
 		return product, nil
 	}

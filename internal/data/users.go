@@ -4,10 +4,10 @@ import (
 	"errors"
 	"log"
 
-	"github.com/kapralovs/warehouse/internal/users"
+	"github.com/kapralovs/warehouse/internal/models"
 )
 
-func (ds *DataStorage) LoadUser(id string) (*users.Profile, error) {
+func (ds *DataStorage) LoadUser(id string) (*models.Profile, error) {
 	if profile, ok := ds.Profiles[id]; ok {
 		return profile, nil
 	}
@@ -24,7 +24,7 @@ func (ds *DataStorage) DeleteUser(id string) error {
 	return errors.New("it is not possible to delete a user profile because it does not exist")
 }
 
-func (ds *DataStorage) SaveUser(p *users.Profile) error {
+func (ds *DataStorage) SaveUser(p *models.Profile) error {
 	if p != nil {
 		if p.Account.ID == "" {
 			return errors.New("can't save profile with empty ID field")

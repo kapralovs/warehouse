@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/kapralovs/warehouse/internal/tasks"
+	"github.com/kapralovs/warehouse/internal/models"
 )
 
-func (ds *DataStorage) LoadTask(id string) (tasks.Task, error) {
+func (ds *DataStorage) LoadTask(id string) (models.Task, error) {
 	if task, ok := ds.Tasks[id]; ok {
 		return task, nil
 	}
@@ -25,7 +25,7 @@ func (ds *DataStorage) DeleteTask(id string) error {
 	return errors.New("it is not possible to delete a task because it does not exist")
 }
 
-func (ds *DataStorage) SaveTask(t tasks.Task) error {
+func (ds *DataStorage) SaveTask(t models.Task) error {
 	if t != nil {
 		if t.ID() == "" {
 			return errors.New("can't save task with empty ID field")

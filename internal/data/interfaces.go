@@ -3,10 +3,7 @@ package data
 import (
 	"sync"
 
-	"github.com/kapralovs/warehouse/internal/products"
-	"github.com/kapralovs/warehouse/internal/tasks"
-	"github.com/kapralovs/warehouse/internal/users"
-	"github.com/kapralovs/warehouse/internal/warehouse"
+	"github.com/kapralovs/warehouse/internal/models"
 )
 
 // type Saver interface {
@@ -24,9 +21,9 @@ import (
 // Структура in-memory базы данных
 type DataStorage struct {
 	mu         sync.Mutex
-	Tasks      map[string]tasks.Task
-	Products   map[string]*products.Product
-	Profiles   map[string]*users.Profile
-	Cells      map[string]*warehouse.Cell
-	Warehouses map[string]*warehouse.Warehouse
+	Tasks      map[string]models.Task
+	Products   map[string]*models.Product
+	Profiles   map[string]*models.Profile
+	Cells      map[string]*models.Cell
+	Warehouses map[string]*models.Warehouse
 }

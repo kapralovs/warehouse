@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/kapralovs/warehouse/internal/models"
 	"github.com/kapralovs/warehouse/internal/users"
-	"github.com/kapralovs/warehouse/internal/view"
 )
 
 func (s *server) homepage() func(http.ResponseWriter, *http.Request) {
@@ -23,7 +23,7 @@ func (s *server) homepage() func(http.ResponseWriter, *http.Request) {
 
 		switch user.General.Role {
 		case users.Manager:
-			fmt.Fprintln(w, view.Show(view.ManagerHomePage))
+			// fmt.Fprintln(w, view.Show(view.ManagerHomePage))
 		case users.Dispatcher:
 		case users.OrderPicker:
 
@@ -97,7 +97,7 @@ func (s *server) createUser() func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
-		newUser := &users.Profile{}
+		newUser := &models.Profile{}
 		if err := json.Unmarshal(body, &newUser); err != nil {
 			log.Println(err)
 			fmt.Fprintln(w, err)

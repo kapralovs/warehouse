@@ -1,10 +1,10 @@
 package tasks
 
-import "github.com/kapralovs/warehouse/internal/users"
+import "github.com/kapralovs/warehouse/internal/models"
 
 // Конструктор для нового заказа
-func NewOrder() *Order {
-	return &Order{}
+func NewOrder() *models.Order {
+	return &models.Order{}
 }
 
 func create() {
@@ -19,7 +19,7 @@ func edit() {
 
 }
 
-func AssignTo(usr *users.Profile) error {
+func AssignTo(usr *models.Profile) error {
 
 	return nil
 }

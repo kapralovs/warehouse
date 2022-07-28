@@ -4,10 +4,10 @@ import (
 	"errors"
 	"log"
 
-	"github.com/kapralovs/warehouse/internal/warehouse"
+	"github.com/kapralovs/warehouse/internal/models"
 )
 
-func (ds *DataStorage) SaveCell(c *warehouse.Cell) error {
+func (ds *DataStorage) SaveCell(c *models.Cell) error {
 	if c != nil {
 		if c.ID == "" {
 			return errors.New("can't save cell with empty ID field")
@@ -24,7 +24,7 @@ func (ds *DataStorage) SaveCell(c *warehouse.Cell) error {
 	return errors.New("can't save current cell, because profile is nil")
 }
 
-func (ds *DataStorage) LoadCell(id string) (*warehouse.Cell, error) {
+func (ds *DataStorage) LoadCell(id string) (*models.Cell, error) {
 	if cell, ok := ds.Cells[id]; ok {
 		return cell, nil
 	}

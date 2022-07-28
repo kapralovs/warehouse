@@ -4,7 +4,7 @@ import (
 	"errors"
 	"log"
 
-	"github.com/kapralovs/warehouse/internal/products"
+	"github.com/kapralovs/warehouse/internal/models"
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
@@ -15,23 +15,23 @@ func NewStorage() *DataStorage {
 
 // Инициализация хранилища
 func (ds *DataStorage) Init() {
-	profilesDB := make(map[string]*users.Profile, 3)
+	profilesDB := make(map[string]*models.Profile, 3)
 	ds.Profiles = profilesDB
-	ds.Profiles["admin"] = &users.Profile{
-		General: &users.GeneralInfo{
+	ds.Profiles["admin"] = &models.Profile{
+		General: &models.GeneralInfo{
 			Lastname: "Adminov",
 			Name:     "Admin",
 			Age:      36,
 			Role:     users.Manager,
 			Salary:   50000,
 		},
-		Account: &users.Account{
+		Account: &models.Account{
 			ID:       "1",
 			Username: "admin",
 			Password: "admin",
 			IsAdmin:  true,
 		},
-		Productivity: &users.Productivity{
+		Productivity: &models.Productivity{
 			PositionsCounter: 234,
 		},
 	}
@@ -54,13 +54,13 @@ func (ds *DataStorage) CheckProductReserve(prodID string) map[string]int {
 }
 
 // Функция проверяет содержимое ячейки
-func CheckCellContent() []*products.Product {
-	var content []*products.Product
+func CheckCellContent() []*models.Product {
+	var content []*models.Product
 
 	return content
 }
 
-func (ds *DataStorage) CheckProfileDuplicates(p *users.Profile) error {
+func (ds *DataStorage) CheckProfileDuplicates(p *models.Profile) error {
 	if p != nil {
 		if p.Account.ID != "" {
 			for id, profile := range ds.Profiles {

@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/kapralovs/warehouse/internal/data"
-	"github.com/kapralovs/warehouse/internal/users"
+	"github.com/kapralovs/warehouse/internal/models"
 )
 
 // func checkCredentials(ds *data.DataStorage, username, password string) (*users.Profile, bool) {
@@ -23,7 +23,7 @@ import (
 // }
 
 // Авторизация пользователя
-func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*users.Profile, error) {
+func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*models.Profile, error) {
 
 	if username, password, ok := r.BasicAuth(); ok {
 		if profile, ok := ds.Profiles[username]; ok {
