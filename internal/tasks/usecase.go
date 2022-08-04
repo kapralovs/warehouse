@@ -1,6 +1,6 @@
 package tasks
 
-type TaskUseCase interface{
+type UseCase interface {
 	Start()
 	Complete()
 }

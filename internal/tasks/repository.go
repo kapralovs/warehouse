@@ -1,6 +1,6 @@
 package tasks
 
-type TaskRepository interface {
+type Repository interface {
 	CreateTask() error
 	EditTask() error
 	GetTasks() error

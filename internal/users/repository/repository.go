@@ -1,11 +1,17 @@
-package data
+package repository
 
 import (
 	"errors"
 	"log"
+	"sync"
 
 	"github.com/kapralovs/warehouse/internal/models"
 )
+
+type UserRepository struct {
+	mu       *sync.Mutex
+	Profiles map[string]*models.Profile
+}
 
 func (ds *DataStorage) LoadUser(id string) (*models.Profile, error) {
 	if profile, ok := ds.Profiles[id]; ok {

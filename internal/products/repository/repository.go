@@ -1,11 +1,17 @@
-package data
+package repository
 
 import (
 	"errors"
 	"log"
+	"sync"
 
 	"github.com/kapralovs/warehouse/internal/models"
 )
+
+type ProductRepository struct {
+	mu       *sync.Mutex
+	Products map[string]*models.Product
+}
 
 func (ds *DataStorage) SaveProduct(p *models.Product) error {
 	if p != nil {
