@@ -13,34 +13,34 @@ type UserRepository struct {
 	Profiles map[string]*models.Profile
 }
 
-func (ds *DataStorage) LoadUser(id string) (*models.Profile, error) {
-	if profile, ok := ds.Profiles[id]; ok {
+func (ur *UserRepository) LoadUser(id string) (*models.Profile, error) {
+	if profile, ok := ur.Profiles[id]; ok {
 		return profile, nil
 	}
 
 	return nil, errors.New("user with this id does not exist")
 }
 
-func (ds *DataStorage) DeleteUser(id string) error {
-	if _, ok := ds.Profiles[id]; ok {
-		delete(ds.Profiles, id)
+func (ur *UserRepository) DeleteUser(id string) error {
+	if _, ok := ur.Profiles[id]; ok {
+		delete(ur.Profiles, id)
 		return nil
 	}
 
 	return errors.New("it is not possible to delete a user profile because it does not exist")
 }
 
-func (ds *DataStorage) SaveUser(p *models.Profile) error {
+func (ur *UserRepository) SaveUser(p *models.Profile) error {
 	if p != nil {
 		if p.Account.ID == "" {
 			return errors.New("can't save profile with empty ID field")
 		}
 
-		ds.mu.Lock()
-		defer ds.mu.Unlock()
-		ds.Profiles[p.Account.ID] = p
+		ur.mu.Lock()
+		defer ur.mu.Unlock()
+		ur.Profiles[p.Account.ID] = p
 
-		log.Printf("The profile \"%s\" is saved.\n", ds.Profiles[p.Account.ID].Account.Username)
+		log.Printf("The profile \"%s\" is saved.\n", ur.Profiles[p.Account.ID].Account.Username)
 		return nil
 	}
 

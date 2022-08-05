@@ -11,37 +11,41 @@ import (
 
 type TaskRepository struct {
 	mu    *sync.Mutex
-	Tasks map[string]*models.Task
+	Tasks map[string]models.Task
 }
 
-func (ds *DataStorage) LoadTask(id string) (models.Task, error) {
-	if task, ok := ds.Tasks[id]; ok {
+func New() *TaskRepository {
+	return &TaskRepository{}
+}
+
+func (tr *TaskRepository) LoadTask(id string) (models.Task, error) {
+	if task, ok := tr.Tasks[id]; ok {
 		return task, nil
 	}
 
 	return nil, fmt.Errorf("task with id \"%v\" does not exist", id)
 }
 
-func (ds *DataStorage) DeleteTask(id string) error {
-	if _, ok := ds.Tasks[id]; ok {
-		delete(ds.Tasks, id)
+func (tr *TaskRepository) DeleteTask(id string) error {
+	if _, ok := tr.Tasks[id]; ok {
+		delete(tr.Tasks, id)
 		return nil
 	}
 
 	return errors.New("it is not possible to delete a task because it does not exist")
 }
 
-func (ds *DataStorage) SaveTask(t models.Task) error {
+func (tr *TaskRepository) SaveTask(t models.Task) error {
 	if t != nil {
 		if t.ID() == "" {
 			return errors.New("can't save task with empty ID field")
 		}
 
-		ds.mu.Lock()
-		defer ds.mu.Unlock()
-		ds.Tasks[t.ID()] = t
+		tr.mu.Lock()
+		defer tr.mu.Unlock()
+		tr.Tasks[t.ID] = t
 
-		log.Printf("The task \"%s\" is saved.\n", ds.Products[t.ID()].ID)
+		log.Printf("The task \"%s\" is saved.\n", tr.Products[t.ID()].ID)
 		return nil
 	}
 

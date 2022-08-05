@@ -13,34 +13,40 @@ type ProductRepository struct {
 	Products map[string]*models.Product
 }
 
-func (ds *DataStorage) SaveProduct(p *models.Product) error {
+func New()*ProductRepository{
+	return &ProductRepository{
+		
+	}
+}
+
+func (pr *ProductRepository) SaveProduct(p *models.Product) error {
 	if p != nil {
 		if p.ID == "" {
 			return errors.New("can't save product with empty ID field")
 		}
 
-		ds.mu.Lock()
-		defer ds.mu.Unlock()
-		ds.Products[p.ID] = p
+		pr.mu.Lock()
+		defer pr.mu.Unlock()
+		pr.Products[p.ID] = p
 
-		log.Printf("The product \"%s\" is saved.\n", ds.Products[p.ID].ID)
+		log.Printf("The product \"%s\" is saved.\n", pr.Products[p.ID].ID)
 		return nil
 	}
 
 	return errors.New("can't save current profile, because profile is nil")
 }
 
-func (ds *DataStorage) LoadProduct(id string) (*models.Product, error) {
-	if product, ok := ds.Products[id]; ok {
+func (pr *ProductRepository) LoadProduct(id string) (*models.Product, error) {
+	if product, ok := pr.Products[id]; ok {
 		return product, nil
 	}
 
 	return nil, errors.New("product with this id does not exist")
 }
 
-func (ds *DataStorage) DeleteProduct(id string) error {
-	if _, ok := ds.Products[id]; ok {
-		delete(ds.Products, id)
+func (pr *ProductRepository) DeleteProduct(id string) error {
+	if _, ok := pr.Products[id]; ok {
+		delete(pr.Products, id)
 		return nil
 	}
 
