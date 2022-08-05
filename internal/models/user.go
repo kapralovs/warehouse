@@ -1,30 +1,39 @@
 package models
 
 // Структура пользователя
-type Profile struct {
-	General      *GeneralInfo
-	Account      *Account
+type User struct {
+	// Общие сведения
+	General *GeneralInfo
+	// Производительность труда
 	Productivity *Productivity
 }
 
 // Основные данные о сотрудники, используемые в основном для официальных отчетов, справок, договоров
 type GeneralInfo struct {
+	// Идентификатор
+	ID string `json:"id"`
+	// Фамилия
 	Lastname string `json:"lastname"`
-	Name     string `json:"name"`
-	Age      int    `json:"age"`
-	Role     string `json:"role"`
-	Salary   int    `json:"Salary"`
-}
-
-// Данные учетной записи пользователя
-type Account struct {
-	ID       string `json:"id"`
+	// Имя
+	Name string `json:"name"`
+	// Возраст
+	Age int `json:"age"`
+	// Роль
+	Role string `json:"role"`
+	// Зарплата
+	Salary int `json:"Salary"`
+	// Имя учетной записи
 	Username string `json:"username"`
+	// Пароль
 	Password string `json:"password"`
-	IsAdmin  bool   `json:"is_admin"`
-	IsOnline bool   `json:"is_online"`
+	// Является ли админом
+	IsAdmin bool `json:"is_admin"`
+	// Статус пользователя
+	IsOnline bool `json:"is_online"`
 }
 
+// Сведения о производительности труда
 type Productivity struct {
+	// Число позиций
 	PositionsCounter int `json:"PositionsCounter"`
 }

@@ -2,13 +2,18 @@ package models
 
 // Структура склада
 type Warehouse struct {
-	ID    int              // ID склада
-	Title string           //Наименование склада
-	Cells map[string]*Cell // Список всех мест склада
+	// ID склада
+	ID int
+	// Наименование склада
+	Title string
+	// Список всех мест склада
+	Cells map[string]*Cell
 }
 
 // Структура ячейки хранения продукта
 type Cell struct {
-	ID      string              // ID ячейки
-	Content map[string]*Product // Содержимое ячейки
+	// ID ячейки
+	ID string
+	// Содержимое ячейки
+	Content map[string]*Product
 }

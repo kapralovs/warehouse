@@ -2,7 +2,10 @@ package models
 
 // Структура продукта
 type Product struct {
-	ID    string // Идентификатор продукта
-	Title string // Наименование продукта
-	Count int    // Кол-во продукта
+	// Идентификатор продукта
+	ID string
+	// Наименование продукта
+	Title string
+	// Кол-во продукта
+	Count int
 }
