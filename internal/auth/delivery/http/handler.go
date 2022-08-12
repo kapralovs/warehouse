@@ -7,10 +7,12 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/kapralovs/warehouse/internal/auth"
+	"github.com/kapralovs/warehouse/internal/models"
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
-func (s *server) createUser() func(http.ResponseWriter, *http.Request) {
+func (s *server) SignUp() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, err := authorization(s.storage, w, r)
 		if err != nil {
@@ -30,7 +32,7 @@ func (s *server) createUser() func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
-		newUser := &models.Profile{}
+		newUser := &models.User{}
 		if err := json.Unmarshal(body, &newUser); err != nil {
 			log.Println(err)
 			fmt.Fprintln(w, err)
@@ -50,44 +52,31 @@ func (s *server) createUser() func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-func (s *server) editUser() func(http.ResponseWriter, *http.Request) {
+func (s *server) SignIn() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-
 	}
 }
 
-func (s *server) deleteUser() func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
+func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*models.User, error) {
 
-	}
-}
-
-func (s *server) getUsers() func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		_, err := authorization(s.storage, w, r)
-		if err != nil {
-			fmt.Fprintln(w, err)
-			return
-		}
-
-		for id := range s.storage.Profiles {
-			profile, err := s.storage.LoadUser(id)
-			if err != nil {
-				fmt.Fprintln(w, err)
-				return
+	if username, password, ok := r.BasicAuth(); ok {
+		if profile, ok := ds.Profiles[username]; ok {
+			if profile.Account.Password == password {
+				ds.Profiles[username].Account.IsOnline = true
+				fmt.Println("Profile pointer", profile)                             //DEBUG
+				fmt.Println("ds.Profiles[username] pointer", ds.Profiles[username]) //DEBUG
+				log.Printf("User \"%s\" is authorised\n", profile.Account.Username)
+				return profile, nil
 			}
-			jsonAsBytes, err := json.Marshal(profile)
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			fmt.Fprintln(w, string(jsonAsBytes))
 		}
+		// if user, ok := checkCredentials(ds, username, password); ok {
+		// 	log.Printf("User \"%s\" is authorised\n", user.Account.Username)
+		// 	return user, nil
+		// }
 	}
-}
 
-func (s *server) getUserByID() func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("WWW-Authenticate", "Basic realm="+r.Header.Get("Authorization"))
+	w.WriteHeader(http.StatusUnauthorized)
 
-	}
+	return nil, auth.ErrAuthFailed
 }

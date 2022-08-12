@@ -7,12 +7,12 @@ type AuthController interface {
 	SignUp()
 }
 
-type UseCase interface {
-	SignIn()
-	SignUp()
+type AuthUseCase interface {
+	SignIn(username, password string) error
+	SignUp(username, password string) (error, string)
 }
 
-type Repository interface {
-	CreateUser()
-	GetUser(id string) (*models.User, error)
+type UserRepository interface {
+	CreateUser(user *models.User) error
+	GetUser(username, password string) (*models.User, error)
 }

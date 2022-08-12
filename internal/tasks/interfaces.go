@@ -6,3 +6,8 @@ type Repository interface {
 	GetTasks() error
 	DeleteTask() error
 }
+
+type UseCase interface {
+	Start()
+	Complete()
+}

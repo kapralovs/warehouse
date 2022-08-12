@@ -1,11 +1,11 @@
 package repository
 
 import (
-	"errors"
 	"log"
 	"sync"
 
 	"github.com/kapralovs/warehouse/internal/models"
+	"github.com/kapralovs/warehouse/internal/warehouse"
 )
 
 type WarehouseRepository struct {
@@ -17,7 +17,7 @@ type WarehouseRepository struct {
 func (wr *WarehouseRepository) SaveCell(c *models.Cell) error {
 	if c != nil {
 		if c.ID == "" {
-			return errors.New("can't save cell with empty ID field")
+			return warehouse.ErrEmptyId
 		}
 
 		wr.mu.Lock()
@@ -28,15 +28,15 @@ func (wr *WarehouseRepository) SaveCell(c *models.Cell) error {
 		return nil
 	}
 
-	return errors.New("can't save current cell, because profile is nil")
+	return warehouse.ErrNilCell
 }
 
-func (wr *WarehouseRepository) LoadCell(id string) (*models.Cell, error) {
+func (wr *WarehouseRepository) GetCell(id string) (*models.Cell, error) {
 	if cell, ok := wr.Cells[id]; ok {
 		return cell, nil
 	}
 
-	return nil, errors.New("cell with this id does not exist")
+	return nil, warehouse.ErrCellNotExists
 }
 
 func (wr *WarehouseRepository) DeleteCell(id string) error {
@@ -45,5 +45,5 @@ func (wr *WarehouseRepository) DeleteCell(id string) error {
 		return nil
 	}
 
-	return errors.New("it is not possible to delete a cell because it does not exist")
+	return warehouse.ErrCellNotExists
 }
