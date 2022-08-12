@@ -1,7 +1,17 @@
 package http
 
-s.router.HandleFunc("/cell", s.getUsers()).Methods("GET")
-s.router.HandleFunc("/cell", s.createUser()).Methods("POST")
-s.router.HandleFunc("/cell/{id}", s.editUser()).Methods("POST")
-s.router.HandleFunc("/cell/{id}", s.deleteUser()).Methods("DELETE")
-s.router.HandleFunc("/cell/{id}", s.getUserByID()).Methods("GET")
+import (
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
+func RegisterHTTPEndpoints(r *mux.Router, uc warehouse.UseCase) {
+	warehouseHandler := NewHandler(uc)
+
+	r.HandleFunc("/cell", s.getCell()).Methods(http.MethodGet)
+	r.HandleFunc("/cell", s.createCell()).Methods(htyp.MethodPost)
+	r.HandleFunc("/cell/{id}", s.editCell()).Methods(http.MethodPost)
+	r.HandleFunc("/cell/{id}", s.deleteCell()).Methods(http.MethodDelete)
+	r.HandleFunc("/cell/{id}", s.getCellByID()).Methods(http.MethodGet)
+}
