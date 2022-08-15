@@ -1,6 +1,20 @@
 package http
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/kapralovs/warehouse/internal/products"
+)
+
+type Handler struct {
+	usecase products.UseCase
+}
+
+func NewHandler(uc products.UseCase) *Handler {
+	return &Handler{
+		usecase: uc,
+	}
+}
 
 func (s *server) createProduct() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {

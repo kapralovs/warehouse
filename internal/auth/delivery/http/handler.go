@@ -12,7 +12,17 @@ import (
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
-func (s *server) SignUp() func(http.ResponseWriter, *http.Request) {
+type Handler struct {
+	usecase auth.UseCase
+}
+
+func NewHandler(uc auth.UseCase) *Handler {
+	return &Handler{
+		usecase: uc,
+	}
+}
+
+func (h *Handler) SignUp() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, err := authorization(s.storage, w, r)
 		if err != nil {
@@ -52,7 +62,7 @@ func (s *server) SignUp() func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-func (s *server) SignIn() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) SignIn() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 	}
 }

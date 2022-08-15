@@ -10,7 +10,7 @@ type Handler struct {
 	usecase tasks.UseCase
 }
 
-func New(u tasks.UseCase) *Handler {
+func NewHandler(u tasks.UseCase) *Handler {
 	return &Handler{
 		usecase: u,
 	}

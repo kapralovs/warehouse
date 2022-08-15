@@ -5,21 +5,33 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/kapralovs/warehouse/internal/products"
 )
 
-func (s *server) editUser() func(http.ResponseWriter, *http.Request) {
+type Handler struct {
+	usecase products.UseCase
+}
+
+func NewHandler(uc users.UseCase) *Handler {
+	return &Handler{
+		usecase: uc,
+	}
+}
+
+func (h *Handler) editUser() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
 
-func (s *server) deleteUser() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) deleteUser() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
 
-func (s *server) getUsers() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) getUsers() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		_, err := authorization(s.storage, w, r)
 		if err != nil {
@@ -43,7 +55,7 @@ func (s *server) getUsers() func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-func (s *server) getUserByID() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) getUserByID() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}

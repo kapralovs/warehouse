@@ -6,7 +6,7 @@ import (
 )
 
 func RegisterEndpoints(r *mux.Router, uc tasks.UseCase) {
-	t := New(uc)
+	t := NewHandler(uc)
 
 	r.HandleFunc("/task", t.createTask()).Methods("GET")
 	r.HandleFunc("/task", t.editTask()).Methods("POST")
