@@ -6,11 +6,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/kapralovs/warehouse/internal/products"
+	"github.com/kapralovs/warehouse/internal/users"
 )
 
 type Handler struct {
-	usecase products.UseCase
+	usecase users.UseCase
 }
 
 func NewHandler(uc users.UseCase) *Handler {

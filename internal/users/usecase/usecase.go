@@ -9,12 +9,12 @@ import (
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
-type UserUseCase struct {
+type UseCase struct {
 	userRepo users.Repository
 }
 
-func New(repo users.Repository) *UserUseCase {
-	return &UserUseCase{
+func New(repo users.Repository) *UseCase {
+	return &UseCase{
 		userRepo: repo,
 	}
 }

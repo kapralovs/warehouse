@@ -1,6 +1,6 @@
 package warehouse
 
-type Usecase interface {
+type UseCase interface {
 	RefillCell()
 }
 

@@ -1,14 +1,18 @@
 package http
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/kapralovs/warehouse/internal/warehouse"
+)
 
 type Handler struct {
-	useCase warehouse.UseCase
+	usecase warehouse.UseCase
 }
 
 func NewHandler(uc warehouse.UseCase) *Handler {
 	return &Handler{
-		useCase: uc,
+		usecase: uc,
 	}
 }
 

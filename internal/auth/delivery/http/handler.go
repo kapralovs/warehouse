@@ -55,7 +55,7 @@ func (h *Handler) SignUp() func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
-		log.Printf("New profile created by user \"%s\"\n", user.Account.Username)
+		log.Printf("New profile created by user \"%s\"\n", user.Username)
 		s.storage.SaveUser(newUser)
 
 		fmt.Fprintln(w, "User profile is created!")
