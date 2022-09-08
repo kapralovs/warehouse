@@ -16,31 +16,31 @@ func NewHandler(uc products.UseCase) *Handler {
 	}
 }
 
-func (s *server) createProduct() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) createProduct() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
 
-func (s *server) editProduct() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) editProduct() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
 
-func (s *server) deleteProduct() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) deleteProduct() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
 
-func (s *server) getProducts() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) getProducts() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
 
-func (s *server) getProductByID() func(http.ResponseWriter, *http.Request) {
+func (h *Handler) getProductByID() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}

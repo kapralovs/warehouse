@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/kapralovs/warehouse/internal/data"
 )
 
 func New() *server {
@@ -15,10 +14,10 @@ func New() *server {
 }
 
 func (s *server) Run() error {
-	s.initRouter()
-	st := data.NewStorage()
-	st.Init()
-	s.storage = st
+	// s.initRouter()
+	// st := data.NewStorage()
+	// st.Init()
+	// s.storage = st
 	log.Println("Server starting on port 8080...")
 	return http.ListenAndServe(":8080", s.router)
 }

@@ -1,13 +1,10 @@
 package server
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 
-	"github.com/kapralovs/warehouse/internal/models"
 	"github.com/kapralovs/warehouse/internal/users"
 )
 
@@ -30,10 +27,3 @@ func (s *server) homepage() func(http.ResponseWriter, *http.Request) {
 		}
 	}
 }
-
-//--------------------Tasks--------------------
-//--------------------Users--------------------
-//--------------------Products--------------------
-//--------------------Cells--------------------
-
-

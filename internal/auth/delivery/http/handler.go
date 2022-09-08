@@ -64,29 +64,54 @@ func (h *Handler) SignUp() func(http.ResponseWriter, *http.Request) {
 
 func (h *Handler) SignIn() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-	}
-}
+		if username, password, ok := r.BasicAuth(); ok {
+			err := h.usecase.SignIn(username, password)
+			if err != nil {
 
-func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*models.User, error) {
-
-	if username, password, ok := r.BasicAuth(); ok {
-		if profile, ok := ds.Profiles[username]; ok {
-			if profile.Account.Password == password {
-				ds.Profiles[username].Account.IsOnline = true
-				fmt.Println("Profile pointer", profile)                             //DEBUG
-				fmt.Println("ds.Profiles[username] pointer", ds.Profiles[username]) //DEBUG
-				log.Printf("User \"%s\" is authorised\n", profile.Account.Username)
-				return profile, nil
 			}
+			// if profile, ok := ds.Profiles[username]; ok {
+
+			// if profile.Account.Password == password {
+			// 	ds.Profiles[username].Account.IsOnline = true
+			// 	fmt.Println("Profile pointer", profile)                             //DEBUG
+			// 	fmt.Println("ds.Profiles[username] pointer", ds.Profiles[username]) //DEBUG
+			// 	log.Printf("User \"%s\" is authorised\n", profile.Account.Username)
+			// 	return profile, nil
+			// }
+			// }
+			// if user, ok := checkCredentials(ds, username, password); ok {
+			// 	log.Printf("User \"%s\" is authorised\n", user.Account.Username)
+			// 	return user, nil
+			// }
 		}
-		// if user, ok := checkCredentials(ds, username, password); ok {
-		// 	log.Printf("User \"%s\" is authorised\n", user.Account.Username)
-		// 	return user, nil
-		// }
+
+		// w.Header().Add("WWW-Authenticate", "Basic realm="+r.Header.Get("Authorization"))
+		// w.WriteHeader(http.StatusUnauthorized)
+
+		// return nil, auth.ErrAuthFailed
 	}
-
-	w.Header().Add("WWW-Authenticate", "Basic realm="+r.Header.Get("Authorization"))
-	w.WriteHeader(http.StatusUnauthorized)
-
-	return nil, auth.ErrAuthFailed
 }
+
+// func authorization(ds *data.DataStorage, w http.ResponseWriter, r *http.Request) (*models.User, error) {
+
+// 	if username, password, ok := r.BasicAuth(); ok {
+// 		if profile, ok := ds.Profiles[username]; ok {
+// 			if profile.Account.Password == password {
+// 				ds.Profiles[username].Account.IsOnline = true
+// 				fmt.Println("Profile pointer", profile)                             //DEBUG
+// 				fmt.Println("ds.Profiles[username] pointer", ds.Profiles[username]) //DEBUG
+// 				log.Printf("User \"%s\" is authorised\n", profile.Account.Username)
+// 				return profile, nil
+// 			}
+// 		}
+// 		// if user, ok := checkCredentials(ds, username, password); ok {
+// 		// 	log.Printf("User \"%s\" is authorised\n", user.Account.Username)
+// 		// 	return user, nil
+// 		// }
+// 	}
+
+// 	w.Header().Add("WWW-Authenticate", "Basic realm="+r.Header.Get("Authorization"))
+// 	w.WriteHeader(http.StatusUnauthorized)
+
+// 	return nil, auth.ErrAuthFailed
+// }

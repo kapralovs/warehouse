@@ -6,10 +6,10 @@ import (
 )
 
 func RegisterEndpoints(r *mux.Router, uc products.UseCase) {
-	ph := NewHandler(uc7)
-	r.HandleFunc("/product", ph.getUsers()).Methods("GET")
-	r.HandleFunc("/product", ph.createUser()).Methods("POST")
-	r.HandleFunc("/product/{id}", ph.editUser()).Methods("POST")
-	r.HandleFunc("/product/{id}", ph.deleteUser()).Methods("DELETE")
-	r.HandleFunc("/product/{id}", ph.getUserByID()).Methods("GET")
+	h := NewHandler(uc)
+	r.HandleFunc("/product", h.getProducts()).Methods("GET")
+	r.HandleFunc("/product", h.createProduct()).Methods("POST")
+	r.HandleFunc("/product/{id}", h.editProduct()).Methods("POST")
+	r.HandleFunc("/product/{id}", h.deleteProduct()).Methods("DELETE")
+	r.HandleFunc("/product/{id}", h.getProductByID()).Methods("GET")
 }

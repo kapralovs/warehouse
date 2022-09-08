@@ -1,7 +1,15 @@
 package http
 
-s.router.HandleFunc("/user", s.getUsers()).Methods("GET")
-	s.router.HandleFunc("/user", s.createUser()).Methods("POST")
-	s.router.HandleFunc("/user/{id}", s.editUser()).Methods("POST")
-	s.router.HandleFunc("/user/{id}", s.deleteUser()).Methods("DELETE")
-	s.router.HandleFunc("/user/{id}", s.getUserByID()).Methods("GET")
+import (
+	"github.com/gorilla/mux"
+	"github.com/kapralovs/warehouse/internal/products"
+)
+
+func RegisterEndpoints(r *mux.Router, uc products.UseCase) {
+	h := NewHandler(uc)
+	// r.HandleFunc("/user", h.getUsers()).Methods("GET")
+	// r.HandleFunc("/user", h.createUser()).Methods("POST")
+	r.HandleFunc("/user/{id}", h.editUser()).Methods("POST")
+	r.HandleFunc("/user/{id}", h.deleteUser()).Methods("DELETE")
+	// r.HandleFunc("/user/{id}", h.getUserByID()).Methods("GET")
+}
