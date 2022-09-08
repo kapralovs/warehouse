@@ -7,27 +7,27 @@ import (
 	"github.com/kapralovs/warehouse/internal/models"
 )
 
-type AuthRepository struct {
+type Repository struct {
 	mu    *sync.Mutex
 	users map[string]*models.User
 }
 
-func New() *AuthRepository {
-	return &AuthRepository{
+func New() *Repository {
+	return &Repository{
 		mu:    new(sync.Mutex),
 		users: make(map[string]*models.User),
 	}
 }
 
-func (ar *AuthRepository) CreateUser(user *models.User) error {
-	ar.mu.Lock()
-	ar.users[user.ID] = user
-	ar.mu.Unlock()
+func (r *Repository) CreateUser(user *models.User) error {
+	r.mu.Lock()
+	r.users[user.ID] = user
+	r.mu.Unlock()
 	return nil
 }
 
-func (ar *AuthRepository) GetUser(username, password string) (*models.User, error) {
-	for _, u := range ar.users {
+func (r *Repository) GetUser(username, password string) (*models.User, error) {
+	for _, u := range r.users {
 		if u.Username == username && u.Password == password {
 			return u, nil
 		}
